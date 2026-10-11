@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#142a30">
+<title>Kendi poker anını yakala</title>
+<style>
+:root{--ivory:#f5f0e7;--muted:#d2d5cf;--teal:#174448;--orange:#cf7148;--plum:#261d29}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#14252c}
+body{min-height:100vh;min-height:100svh;color:var(--ivory);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.page{width:min(100%,1500px);min-height:100svh;margin:auto;padding:clamp(20px,4vw,60px);display:grid;grid-template-columns:minmax(0,.92fr) minmax(360px,1.08fr);gap:clamp(30px,6vw,90px);align-items:center}
+.copy{position:relative;z-index:2;max-width:570px}
+h1{margin:0;font-size:clamp(42px,5.8vw,80px);line-height:.99;letter-spacing:-.065em;font-weight:650;text-wrap:balance}
+h1 span{color:#e1a17c}
+.benefits{list-style:none;margin:clamp(28px,4vw,44px) 0 0;padding:0;display:grid;gap:18px}
+.benefits li{display:flex;align-items:center;gap:14px;font-size:clamp(16px,1.35vw,19px);line-height:1.4;color:#e6e8e1}
+.benefits li:before{content:"";width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px #cf71481f}
+.cta{display:flex;align-items:center;justify-content:center;gap:18px;width:min(100%,330px);min-height:60px;margin-top:clamp(30px,4vw,44px);padding:0 24px;border:1px solid #ffe7d275;border-radius:5px;color:#fff8ed;background:linear-gradient(135deg,#c86b45,#a94b39);box-shadow:0 14px 34px #0004;font-size:13px;font-weight:760;letter-spacing:.11em;text-decoration:none;transition:transform .18s,filter .18s}
+.cta:hover{transform:translateY(-2px);filter:brightness(1.08)}.cta:focus-visible{outline:2px solid #fff8ed;outline-offset:4px}.cta svg{width:17px;height:17px}
+.scene{position:relative;min-height:min(68vw,740px);height:min(76vh,760px);overflow:hidden;border:1px solid #f5f0e729;border-radius:4px;isolation:isolate;background:linear-gradient(180deg,#0a121806 0%,#0a121820 45%,#0a1218c7 100%),radial-gradient(ellipse at 68% 20%,#d5845580,transparent 26%),linear-gradient(150deg,#536267,#263d45 32%,#162b34 68%,#0e1b24);box-shadow:0 35px 90px #0005}
+.city{position:absolute;inset:0;opacity:.9;background:linear-gradient(90deg,transparent 0 8%,#101d2566 8% 9%,transparent 9% 18%,#101d2573 18% 20%,transparent 20% 33%,#101d2580 33% 35%,transparent 35% 48%,#101d2559 48% 50%,transparent 50% 65%,#101d258c 65% 68%,transparent 68% 78%,#101d2573 78% 80%,transparent 80%),repeating-linear-gradient(0deg,transparent 0 47px,#eec9a217 48px 49px),linear-gradient(180deg,#6d7774,#4b6667 30%,#203c43 58%,#12242c);clip-path:polygon(0 0,100% 0,100% 66%,0 78%)}
+.building{position:absolute;bottom:28%;background:linear-gradient(90deg,#081116d1,#24393bc2,#091318e6);border:1px solid #eec9a21f}
+.b1{left:4%;width:18%;height:35%}.b2{left:25%;width:21%;height:47%}.b3{left:49%;width:17%;height:39%}.b4{right:4%;width:25%;height:53%}
+.windows{position:absolute;inset:7px;opacity:.7;background:repeating-linear-gradient(0deg,transparent 0 15px,#e6ac706b 16px 17px),repeating-linear-gradient(90deg,transparent 0 13px,#e6ac7047 14px 15px)}
+.table{position:absolute;left:3%;right:-8%;bottom:-2%;height:48%;border-radius:50% 50% 0 0/30% 30% 0 0;background:repeating-linear-gradient(7deg,#ffffff03 0 1px,transparent 1px 4px),radial-gradient(ellipse at 48% 8%,#2b6660,#173e40 52%,#10272e);border:12px solid #202a2c;box-shadow:0 -10px 30px #0005,inset 0 0 0 2px #e7dcc526;transform:rotate(-5deg)}
+.phone{display:none;position:absolute;right:11%;top:28%;width:29%;aspect-ratio:.49;border-radius:23px;padding:7px;background:linear-gradient(120deg,#d1d0c6,#50595a 35%,#1b2529 70%,#b8b7ae);box-shadow:18px 24px 42px #0007;transform:rotate(9deg)}
+.screen{width:100%;height:100%;border-radius:17px;overflow:hidden;position:relative;background:linear-gradient(160deg,#102c31,#071318);border:1px solid #ffffff40}
+.screen:before{content:"";position:absolute;top:9%;left:10%;right:10%;height:32%;border-radius:5px;background:radial-gradient(circle at 32% 35%,#d8d0b8 0 5%,transparent 6%),radial-gradient(circle at 67% 65%,#c76b48 0 7%,transparent 8%),linear-gradient(135deg,#23524b,#0e2428);border:1px solid #ebe7d624}
+.screen:after{content:"";position:absolute;left:12%;right:12%;bottom:12%;height:38%;background:repeating-linear-gradient(0deg,#e9e6dab3 0 2px,transparent 2px 15px);opacity:.32}
+.phone-glint{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,#ffffff33,transparent 30% 75%,#ffffff0f);pointer-events:none}
+.hand{display:none;position:absolute;width:36%;height:21%;right:20%;top:52%;background:linear-gradient(125deg,#c68e70,#99664f 58%,#714836);border-radius:48% 42% 35% 50%;transform:rotate(-27deg);box-shadow:5px 12px 20px #0005;opacity:.96}
+.hand:before{content:"";position:absolute;width:64%;height:38%;left:-30%;top:26%;border-radius:50%;background:linear-gradient(90deg,#a97559,#d09a7a);transform:rotate(22deg)}
+.chip{position:absolute;width:13%;aspect-ratio:1;border-radius:50%;background:repeating-conic-gradient(#e4d8c2 0deg 12deg,#bd6444 12deg 24deg);padding:5px;box-shadow:0 9px 16px #0006}
+.chip:after{content:"";display:block;width:100%;height:100%;border-radius:50%;background:#193b3b;border:1px solid #efe2cc99}
+.chip1{left:18%;bottom:17%}.chip2{left:30%;bottom:13%;transform:scale(.83)}.chip3{left:22%;bottom:7%;transform:scale(.72)}
+
+.card {
+  position:absolute;
+  z-index:3;
+  top:25%;
+  width:30%;
+  height:43%;
+  background:linear-gradient(145deg,#fffdf6,#e9e2d4);
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:12px;
+  box-shadow:0 28px 48px rgba(0,0,0,.38), inset 0 0 0 1px rgba(24,32,34,.08);
+  color:#172329;
+  font-family:Georgia,"Times New Roman",serif;
+}
+.card-ace { left:20%; transform:rotate(-11deg); }
+.card-king { left:43%; top:29%; transform:rotate(9deg); color:#b54f42; }
+.card-rank { position:absolute; left:10%; top:5%; font-size:clamp(26px,4vw,48px); line-height:.85; font-weight:700; }
+.card-suit { position:absolute; left:11%; top:16%; font-size:clamp(17px,2.5vw,28px); }
+.card-center { position:absolute; inset:0; display:grid; place-items:center; font-size:clamp(90px,15vw,180px); line-height:1; }
+.card-center.red,.red { color:#b54f42; }
+.card-corner { position:absolute; right:10%; bottom:7%; font-size:clamp(23px,3.5vw,40px); line-height:.85; font-weight:700; text-align:center; transform:rotate(180deg); }
+.scene .table { left:-8%; right:-8%; bottom:-13%; height:53%; transform:rotate(-5deg); }
+.scene .chip1 { left:20%; bottom:13%; z-index:4; }
+.scene .chip2 { left:31%; bottom:8%; z-index:4; }
+.scene .scene-caption { z-index:5; }
+
+.scene-caption{position:absolute;left:8%;bottom:7%;color:#f5f0e7a8;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+@media(max-width:760px){.page{display:flex;flex-direction:column;align-items:stretch;gap:28px;padding:max(24px,env(safe-area-inset-top)) 20px max(26px,env(safe-area-inset-bottom))}.copy{max-width:none;padding-top:10px}h1{font-size:clamp(41px,10.8vw,64px)}.benefits{margin-top:26px;gap:15px}.benefits li{font-size:16px}.cta{width:100%;margin-top:28px;min-height:58px}.scene{order:2;width:100%;height:105vw;min-height:340px;max-height:520px}.card{top:23%;height:42%;width:31%}.card-ace{left:17%}.card-king{left:42%;top:28%}.card-center{font-size:clamp(82px,20vw,140px)}.table{height:45%}}
+@media(max-width:380px){.page{padding-left:16px;padding-right:16px}h1{font-size:39px}.scene{min-height:300px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1399310622039113');fbq('track','PageView');
+</script>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<main class="page">
+<section class="copy">
+<h1>Kendi poker<br><span>anını yakala.</span></h1>
+<ul class="benefits">
+<li>7/24 online poker</li>
+<li>Kullanımı kolay arayüz</li>
+<li>Farklı oyun formatları</li>
+</ul>
+<a class="cta" href="https://t.me/+XZWlJnhwXAQzOWJh" target="_blank" rel="noopener noreferrer" id="join-button">KATIL
+<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+</section>
+<section class="scene" aria-hidden="true">
+  <div class="city"></div>
+  <div class="table"></div>
+  <div class="card card-ace">
+    <span class="card-rank">A</span><span class="card-suit">♠</span>
+    <span class="card-center">♠</span>
+    <span class="card-corner bottom">A<br>♠</span>
+  </div>
+  <div class="card card-king">
+    <span class="card-rank">K</span><span class="card-suit">♥</span>
+    <span class="card-center red">♥</span>
+    <span class="card-corner bottom red">K<br>♥</span>
+  </div>
+  <div class="chip chip1"></div>
+  <div class="chip chip2"></div>
+  <div class="scene-caption">ISTANBUL · AFTER HOURS</div>
+</section>
+</main>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1399310622039113&ev=PageView&noscript=1" alt=""></noscript>
+</body>
+</html>
